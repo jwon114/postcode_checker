@@ -7,10 +7,11 @@ class PostcodeTest < ActiveSupport::TestCase
     postcode = Postcode.new('invalid_postcode')
     
     assert_not postcode.is_valid?
-    assert_equal "Invalid postcode", postcode.result["error"]
+    # assert_equal "Invalid postcode", postcode.result["error"]
   end
 
   test '#is_valid? - API response contains LSOA Southwark' do
+    sample_valid_result = Postcode(:valid).json
     postcode = Postcode.new('SE17QD')
     
     assert postcode.is_valid?
@@ -23,6 +24,17 @@ class PostcodeTest < ActiveSupport::TestCase
 
     assert postcode.is_valid?
     assert postcode.result["lsoa"].start_with?('Lambeth')
+  end
+
+  test '#fetch_postcode_data - successful fetch' do
+    
+  end
+
+  test '#fetch_postcode_data - unsuccessful fetch' do
+    postcode = Postcode.new('invalid_postcode')
+    result = postcode.fetch_postcode_data
+  
+    assert_equal "Invalid postcode", result["error"]
   end
 
   test '#input_valid? - valid postcode input' do
