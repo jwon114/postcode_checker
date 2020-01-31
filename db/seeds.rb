@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+whitelist_postcodes = %w(SH241AA SH241AB)
+whitelist_postcodes.each do |p|
+  WhitelistedPostcode.create(postcode: p)
+end

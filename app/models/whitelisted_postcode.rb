@@ -1,0 +1,2 @@
+class WhitelistedPostcode < ApplicationRecord
+end
