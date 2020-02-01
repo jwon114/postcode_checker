@@ -1,0 +1,3 @@
+class PostcodeCheckerController < ApplicationController
+  
+end

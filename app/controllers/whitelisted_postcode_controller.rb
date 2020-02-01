@@ -1,0 +1,3 @@
+class WhitelistedPostcodeController < ApplicationController
+  
+end
