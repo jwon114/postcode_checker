@@ -1,5 +1,4 @@
 require 'net/http'
-require 'pry-rails'
 
 class Postcode
   URL = 'http://postcodes.io'

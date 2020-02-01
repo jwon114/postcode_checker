@@ -4,14 +4,6 @@ require 'pry-rails'
 class WhitelistedPostcodeTest < ActiveSupport::TestCase
   WHITELISTED_POSTCODES = %w(SH241AA SH241AB)
 
-  test 'validation - postcode presence' do
-    
-  end
-
-  test 'validation - postcode uniqueness' do
-    
-  end
-
   test '#check - first postcode is whitelisted' do
     postcode = WHITELISTED_POSTCODES.first
 
