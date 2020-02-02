@@ -1,0 +1,12 @@
+<h1>Postcode Checker</h1>
+
+<%= form_with(url: postcode_checker_check_url, method: 'post') do %>
+  <%= text_field_tag(:postcode) %>
+  <%= submit_tag("Check", name: 'submit_postcode') %>
+<% end %>
+
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+    <%= msg %>
+  </div>
+<% end %>

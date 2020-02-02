@@ -2,16 +2,14 @@ require 'test_helper'
 require 'pry-rails'
 
 class WhitelistedPostcodeTest < ActiveSupport::TestCase
-  WHITELISTED_POSTCODES = %w(SH241AA SH241AB)
-
   test '#check - first postcode is whitelisted' do
-    postcode = WHITELISTED_POSTCODES.first
+    postcode = whitelisted_postcodes(:one).postcode
 
     assert WhitelistedPostcode.check?(postcode)
   end
 
   test '#check - second postcode is whitelisted' do
-    postcode = WHITELISTED_POSTCODES.second
+    postcode = whitelisted_postcodes(:two).postcode
 
     assert WhitelistedPostcode.check?(postcode)
   end
