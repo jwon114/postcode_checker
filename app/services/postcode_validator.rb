@@ -1,6 +1,6 @@
 require 'net/http'
 
-class Postcode
+class PostcodeValidator
   URL = 'http://postcodes.io'
   WHITELISTED_LSOA = %w(Southwark Lambeth)
   
@@ -19,7 +19,9 @@ class Postcode
     return fetch_response.kind_of?(Net::HTTPSuccess) && @response["result"]["lsoa"].start_with?(*WHITELISTED_LSOA)
   end
 
-  private
+  def input_valid?
+    return /^[a-zA-Z0-9]*$/.match?(@postcode)
+  end
 
   def fetch_postcode_data
     uri = URI("#{URL}/postcodes/#{@postcode}")
@@ -27,10 +29,6 @@ class Postcode
   end
 
   def whitelisted_postcode?
-    return WhitelistedPostcode.check?(@postcode)
-  end
-
-  def input_valid?
-    return /^[a-zA-Z0-9]*$/.match?(@postcode)
+    return WhitelistedPostcode.exists?(postcode: @postcode)
   end
 end

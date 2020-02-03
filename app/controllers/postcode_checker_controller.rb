@@ -4,12 +4,13 @@ class PostcodeCheckerController < ApplicationController
   end
 
   def check
-    postcode = Postcode.new(params.require(:postcode))
+    code = params.require(:postcode)
+    postcode = PostcodeValidator.new(code)
     
     if postcode.is_valid?
-      flash[:notice] = 'Postcode is whitelisted'
+      flash[:notice] = "Postcode '#{code}' is whitelisted"
     else
-      flash[:error] = 'Postcode is NOT whitelisted'
+      flash[:error] = "Postcode '#{code}' is NOT whitelisted"
     end
 
     redirect_to postcode_checker_url
