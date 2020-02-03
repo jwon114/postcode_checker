@@ -11,13 +11,13 @@ class PostcodeCheckerControllerTest < ActionController::TestCase
     post :check, params: { postcode: 'SE17QD' }
 
     assert_redirected_to postcode_checker_url
-    assert_equal 'Postcode is whitelisted', flash[:notice]
+    assert_equal "Postcode 'SE17QD' is whitelisted", flash[:notice]
   end
 
   test '#check - should check non whitelisted postcode and flash error' do
     post :check, params: { postcode: 'ABC123' }
 
     assert_redirected_to postcode_checker_url
-    assert_equal 'Postcode is NOT whitelisted', flash[:error]
+    assert_equal "Postcode 'ABC123' is NOT whitelisted", flash[:error]
   end
 end
