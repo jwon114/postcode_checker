@@ -1,9 +1,10 @@
 class PostcodeCheckerController < ApplicationController
   def index
+    @whitelisted_postcodes = WhitelistedPostcode.all
   end
 
   def check
-    postcode = Postcode.new(params[:postcode])
+    postcode = Postcode.new(params.require(:postcode))
     
     if postcode.is_valid?
       flash[:notice] = 'Postcode is whitelisted'
