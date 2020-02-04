@@ -1,1 +1,31 @@
 <h1>Whitelisted Postcodes</h1>
+
+<%= form_with(url: whitelisted_postcodes_url, method: 'post') do %>
+  <%= text_field_tag(:postcode) %>
+  <%= submit_tag("Add", name: 'add_postcode') %>
+<% end %>
+
+<% flash.each do |type, msg| %>
+  <p><%= msg %></p>
+<% end %>
+
+<% if @postcodes.present? %>
+  <table>
+    <thead>
+      <th>Postcode</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% @postcodes.each do |p| %>
+        <tr>
+          <td><%= p.postcode%></td>
+          <td><%= link_to 'Delete', whitelisted_postcode_url(p), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No Whitelisted Postcodes</h3>
+<% end %>
+
+<%= link_to 'Back to Postcode Checker', postcode_checker_url %>

@@ -3,6 +3,7 @@ require 'net/http'
 class PostcodeValidator
   URL = 'http://postcodes.io'
   WHITELISTED_LSOA = %w(Southwark Lambeth)
+  RESPONSE_CODES = [Net::HTTPSuccess, Net::HTTPNotFound]
   
   attr_reader :response
 
@@ -12,11 +13,9 @@ class PostcodeValidator
   end
 
   def is_valid?
-    return false unless input_valid?
+    return false unless input_valid? || @response.present?
     return true if whitelisted_postcode?
-    fetch_response = fetch_postcode_data
-    @response = JSON.parse(fetch_response.body)
-    return fetch_response.kind_of?(Net::HTTPSuccess) && @response["result"]["lsoa"].start_with?(*WHITELISTED_LSOA)
+    return @response[:result].present? ? @response.dig(:result, :lsoa).start_with?(*WHITELISTED_LSOA) : false
   end
 
   def input_valid?
@@ -25,7 +24,8 @@ class PostcodeValidator
 
   def fetch_postcode_data
     uri = URI("#{URL}/postcodes/#{@postcode}")
-    return Net::HTTP.get_response(uri)
+    response = Net::HTTP.get_response(uri)
+    @response = JSON.parse(response.body).with_indifferent_access if RESPONSE_CODES.any? { |s| response.kind_of?(s) }
   end
 
   def whitelisted_postcode?

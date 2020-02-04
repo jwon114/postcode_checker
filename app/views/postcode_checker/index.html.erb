@@ -6,9 +6,7 @@
 <% end %>
 
 <% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
+  <p><%= msg %></p>
 <% end %>
 
 <% if @whitelisted_postcodes.present? %>
@@ -22,4 +20,4 @@
   <h3>No Whitelisted Postcodes</h3>
 <% end %>
 
-<%= link_to %>
+<%= link_to 'Whitelisted Postcodes', whitelisted_postcodes_url %>

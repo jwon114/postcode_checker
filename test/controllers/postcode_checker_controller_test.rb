@@ -14,10 +14,17 @@ class PostcodeCheckerControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Postcode 'SE17QD' is within your service area", flash[:notice]
   end
 
-  test '#check - should check non whitelisted postcode and flash error' do
+  test '#check - invalid postcode and flash error' do
     post postcode_checker_check_url, params: { postcode: 'ABC123' }
 
     assert_redirected_to postcode_checker_url
-    assert_equal "Postcode 'ABC123' is NOT within your service area", flash[:error]
+    assert_equal "Invalid postcode", flash[:error]
+  end
+
+  test '#check - should check non whitelisted postcode and flash error' do
+    post postcode_checker_check_url, params: { postcode: 'OX49 5NU' }
+
+    assert_redirected_to postcode_checker_url
+    assert_equal "Postcode 'OX49 5NU' is NOT within your service area", flash[:error]
   end
 end

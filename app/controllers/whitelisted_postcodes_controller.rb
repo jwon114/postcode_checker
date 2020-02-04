@@ -12,7 +12,7 @@ class WhitelistedPostcodesController < ApplicationController
     if postcode_validator.whitelisted_postcode?
       flash[:error] = "Postcode '#{postcode}' is already whitelisted"
     elsif !postcode_validator.input_valid?
-      flash[:error] = "'#{postcode}' is an invalid postcode"
+      flash[:error] = "'#{postcode}' is not a valid postcode"
     else
       whitelisted_postcode = WhitelistedPostcode.new
       whitelisted_postcode.postcode = postcode

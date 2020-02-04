@@ -1,41 +1,46 @@
 require 'test_helper'
-require 'net/http'
 
 class PostcodeValidatorTest < ActiveSupport::TestCase
   test '#fetch_postcode_data - successful fetch' do
     postcode = PostcodeValidator.new('SE17QD')
-    fetch_response = postcode.fetch_postcode_data
+    postcode.fetch_postcode_data
 
-    assert fetch_response.kind_of?(Net::HTTPSuccess)
+    assert postcode.response.present?
+    assert postcode.response.has_key?(:result)
   end
 
   test '#fetch_postcode_data - unsuccessful fetch' do
     postcode = PostcodeValidator.new('invalid_postcode')
-    fetch_response = postcode.fetch_postcode_data
+    postcode.fetch_postcode_data
 
-    assert_not fetch_response.kind_of?(Net::HTTPSuccess)
+    assert postcode.response.present?
+    assert postcode.response.has_key?(:error)
   end
 
   test '#is_valid? - postcode is not within Southwark or Lambeth' do
     postcode = PostcodeValidator.new('N102RE')
+    postcode.fetch_postcode_data
     
     assert_not postcode.is_valid?
   end
 
   test '#is_valid? - API response contains LSOA Southwark' do
     postcode = PostcodeValidator.new('SE17QD')
+    postcode.fetch_postcode_data
     
     assert postcode.is_valid?
   end
 
   test '#is_valid? - API response contains LSOA Lambeth' do
     postcode = PostcodeValidator.new('SE17QA')
+    postcode.fetch_postcode_data
 
     assert postcode.is_valid?
   end
 
   test '#is_valid? - whitelisted postcode SH241AA' do
     postcode = PostcodeValidator.new('SH241AA')
+    postcode.fetch_postcode_data
 
     assert postcode.is_valid?
   end

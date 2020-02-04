@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'pry-rails'
 
 class WhitelistedPostcodesControllerTest < ActionDispatch::IntegrationTest
   test '#index - list all postcodes and options to add/remove' do
@@ -33,7 +32,7 @@ class WhitelistedPostcodesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to whitelisted_postcodes_url
-    assert_equal "'1;$%@^' is an invalid postcode", flash[:error]
+    assert_equal "'1;$%@^' is not a valid postcode", flash[:error]
   end
 
   test '#destroy - postcode is destroyed from whitelist' do
