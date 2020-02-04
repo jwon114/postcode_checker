@@ -8,9 +8,9 @@ class PostcodeCheckerController < ApplicationController
     postcode = PostcodeValidator.new(code)
     
     if postcode.is_valid?
-      flash[:notice] = "Postcode '#{code}' is whitelisted"
+      flash[:notice] = "Postcode '#{code}' is within your service area"
     else
-      flash[:error] = "Postcode '#{code}' is NOT whitelisted"
+      flash[:error] = "Postcode '#{code}' is NOT within your service area"
     end
 
     redirect_to postcode_checker_url

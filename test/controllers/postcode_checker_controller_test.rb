@@ -1,23 +1,23 @@
 require 'test_helper'
 
-class PostcodeCheckerControllerTest < ActionController::TestCase
+class PostcodeCheckerControllerTest < ActionDispatch::IntegrationTest
   test '#index - should get index' do
-    get :index
+    get postcode_checker_url
     
     assert_response :success
   end
 
   test '#check - should check whitelisted postcode and flash notice' do
-    post :check, params: { postcode: 'SE17QD' }
+    post postcode_checker_check_url, params: { postcode: 'SE17QD' }
 
     assert_redirected_to postcode_checker_url
-    assert_equal "Postcode 'SE17QD' is whitelisted", flash[:notice]
+    assert_equal "Postcode 'SE17QD' is within your service area", flash[:notice]
   end
 
   test '#check - should check non whitelisted postcode and flash error' do
-    post :check, params: { postcode: 'ABC123' }
+    post postcode_checker_check_url, params: { postcode: 'ABC123' }
 
     assert_redirected_to postcode_checker_url
-    assert_equal "Postcode 'ABC123' is NOT whitelisted", flash[:error]
+    assert_equal "Postcode 'ABC123' is NOT within your service area", flash[:error]
   end
 end

@@ -10,13 +10,13 @@ class PostcodeCheckersTest < ApplicationSystemTestCase
     visit postcode_checker_url
     fill_in 'postcode', with: 'SE17QD'
     click_on 'submit_postcode'
-    assert_text 'Postcode is whitelisted'
+    assert_text "Postcode 'SE17QD' is within your service area"
   end
 
   test 'checking non-whitelisted postcode' do
     visit postcode_checker_url
     fill_in 'postcode', with: '123ABC'
     click_on 'submit_postcode'
-    assert_text 'Postcode is NOT whitelisted'
+    assert_text "Postcode '123ABC' is NOT within your service area"
   end
 end
