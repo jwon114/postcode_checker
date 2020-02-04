@@ -25,6 +25,6 @@ class PostcodeCheckerControllerTest < ActionDispatch::IntegrationTest
     post postcode_checker_check_url, params: { postcode: 'OX49 5NU' }
 
     assert_redirected_to postcode_checker_url
-    assert_equal "Postcode 'OX49 5NU' is NOT within your service area", flash[:error]
+    assert_equal "Postcode 'OX495NU' is NOT within your service area", flash[:error]
   end
 end

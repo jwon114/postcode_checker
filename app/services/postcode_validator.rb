@@ -5,7 +5,7 @@ class PostcodeValidator
   WHITELISTED_LSOA = %w(Southwark Lambeth)
   RESPONSE_CODES = [Net::HTTPSuccess, Net::HTTPNotFound]
   
-  attr_reader :response
+  attr_reader :response, :postcode
 
   def initialize(postcode)
     @response = nil

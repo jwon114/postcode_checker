@@ -6,16 +6,16 @@ class PostcodeCheckerController < ApplicationController
   end
 
   def check
-    code = params.require(:postcode)
-    postcode = PostcodeValidator.new(code)
-    postcode.fetch_postcode_data
+    postcode = params.require(:postcode)
+    postcode_validator = PostcodeValidator.new(postcode)
+    postcode_validator.fetch_postcode_data
 
-    if postcode.is_valid?
-      flash[:notice] = "Postcode '#{code}' is within your service area"
-    elsif postcode.response.has_key?("error")
-      flash[:error] = postcode.response[:error]
+    if postcode_validator.is_valid?
+      flash[:notice] = "Postcode '#{postcode_validator.postcode}' is within your service area"
+    elsif postcode_validator.response.has_key?("error")
+      flash[:error] = postcode_validator.response[:error]
     else
-      flash[:error] = "Postcode '#{code}' is NOT within your service area"
+      flash[:error] = "Postcode '#{postcode_validator.postcode}' is NOT within your service area"
     end
 
     redirect_to postcode_checker_url

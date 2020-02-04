@@ -14,7 +14,7 @@ class WhitelistedPostcodesControllerTest < ActionDispatch::IntegrationTest
     end
     
     assert_redirected_to whitelisted_postcodes_url
-    assert_equal 'New Postcode EC1A Whitelisted', flash[:notice]
+    assert_equal "New Postcode 'EC1A' Whitelisted", flash[:notice]
   end
 
   test '#create - postcode already exists on whitelist' do
@@ -42,6 +42,6 @@ class WhitelistedPostcodesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to whitelisted_postcodes_url
-    assert_equal 'Postcode SH241AA removed', flash[:notice]
+    assert_equal "Postcode 'SH241AA' removed", flash[:notice]
   end
 end
