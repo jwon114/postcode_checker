@@ -11,9 +11,15 @@ A simple web application to work out if a given postcode is within their service
 * No guarantees about the format of the input given.
 * Whitelists will need to be changed from time to time.
 
+## Assumptions
+
+* Postcode input only contains alphanumeric characters.
+* Whitespace between characters are disregarded and postcodes with the same characters and order are considered the same. For example, SE1 7QD and SE17QD are the same postcode.
+
 ## Getting Started
 
-Download the project and navigate to the project root. 
+Download the project and navigate to the project root.
+
 Execute database setup to create database and seed the postcode whitelist with two postcodes: SH24 1AA and SH24 1AB.
 
 ```
@@ -23,7 +29,7 @@ rails db:setup
 Start the rails server:
 
 ```
-rails start
+rails server
 ```
 
 ## Testing
