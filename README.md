@@ -14,7 +14,7 @@ A simple web application to work out if a given postcode is within their service
 ## Assumptions
 
 * Postcode input only contains alphanumeric characters.
-* Whitespace between characters are disregarded and postcodes with the same characters and order are considered the same. For example, SE1 7QD and SE17QD are the same postcode.
+* Whitespaces in postcode input are disregarded and therefore treated as the same postcode. For example, SE1 7QD and SE17QD are the same postcode.
 
 ## Getting Started
 
