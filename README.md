@@ -32,6 +32,8 @@ Start the rails server:
 rails server
 ```
 
+Open browser to http://localhost:3000
+
 ## Testing
 
 To execute unit tests:

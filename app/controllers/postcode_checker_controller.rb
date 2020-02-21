@@ -1,5 +1,3 @@
-require 'pry-rails'
-
 class PostcodeCheckerController < ApplicationController
   def index
     @whitelisted_postcodes = WhitelistedPostcode.all
