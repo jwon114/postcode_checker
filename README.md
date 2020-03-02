@@ -20,6 +20,12 @@ A simple web application to work out if a given postcode is within their service
 
 Download the project and navigate to the project root.
 
+Bundle Ruby gems
+
+```
+bundle install
+```
+
 Execute database setup to create database and seed the postcode whitelist with two postcodes: SH24 1AA and SH24 1AB.
 
 ```
